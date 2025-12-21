@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+  <meta charset="UTF-8" />
+  <title>DateTimePicker</title>
+  <link rel="stylesheet" href="styles/datetimepicker.css" />
+</head>
+<body>
+
+<div id="dtp"></div>
+
+<script type="module">
+  import DateTimePickerController from './src/core/controller.js';
+  import { initDateTimePickerUI } from './src/ui/index.js';
+
+  const controller = new DateTimePickerController({
+    displayCalendar: 'jalali',
+    outputFormat: 'iso',
+    onChange: console.log
+  });
+
+  initDateTimePickerUI('#dtp', controller);
+</script>
+
+</body>
+</html>

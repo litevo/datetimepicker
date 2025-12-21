@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+  <meta charset="UTF-8" />
+  <title>DateTimePicker – Multi Calendar Test</title>
+
+  <link rel="stylesheet" href="styles/datetimepicker.css" />
+
+  <style>
+    body {
+      font-family: sans-serif;
+      padding: 20px;
+    }
+
+    .row {
+      display: flex;
+      gap: 40px;
+    }
+
+    .picker-box {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .output {
+      margin-top: 10px;
+      font-size: 12px;
+      background: #f5f5f5;
+      padding: 6px;
+      width: 260px;
+      word-break: break-all;
+    }
+
+    h3 {
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Multi Calendar DateTimePicker Test</h1>
+
+<div class="row">
+
+  <div class="picker-box">
+    <h3>Gregorian</h3>
+    <div id="picker-gregorian"></div>
+    <div id="out-gregorian" class="output"></div>
+  </div>
+
+  <div class="picker-box">
+    <h3>Jalali (شمسی)</h3>
+    <div id="picker-jalali"></div>
+    <div id="out-jalali" class="output"></div>
+  </div>
+
+  <div class="picker-box">
+    <h3>Hijri (قمری)</h3>
+    <div id="picker-hijri"></div>
+    <div id="out-hijri" class="output"></div>
+  </div>
+
+</div>
+
+<script type="module">
+  import DateTimePickerController from './src/core/controller.js';
+  import { initDateTimePickerUI } from './src/ui/index.js';
+
+  function setupPicker({
+    container,
+    output,
+    displayCalendar
+  }) {
+    const outEl = document.querySelector(output);
+
+    const controller = new DateTimePickerController({
+      displayCalendar,
+      outputFormat: 'iso',
+      onChange: (value, meta) => {
+        outEl.textContent =
+          'output: ' + value + '\n' +
+          'timestamp: ' + meta.timestamp + '\n' +
+          'calendar: ' + meta.displayCalendar;
+      }
+    });
+
+    initDateTimePickerUI(container, controller);
+  }
+
+  setupPicker({
+    container: '#picker-gregorian',
+    output: '#out-gregorian',
+    displayCalendar: 'gregorian'
+  });
+
+  setupPicker({
+    container: '#picker-jalali',
+    output: '#out-jalali',
+    displayCalendar: 'jalali'
+  });
+
+  setupPicker({
+    container: '#picker-hijri',
+    output: '#out-hijri',
+    displayCalendar: 'hijri'
+  });
+</script>
+
+</body>
+</html>
