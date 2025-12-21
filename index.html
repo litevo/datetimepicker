@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+  <meta charset="UTF-8">
+  <title>نمونه DateTimePicker</title>
+  <link rel="stylesheet" href="styles/datetimepicker.css">
+</head>
+<body>
+
+  <div class="field">
+    <label for="startdate">تاریخ شروع (نمایش: هجری / ذخیره: میلادی)</label>
+    <!-- فیلد نمایش -->
+    <input id="startdate" type="text" data-dtp="true" data-target-hidden="#startdate_g" />
+
+    <!-- فیلد مخفی با مقدار اولیه میلادی -->
+    <input id="startdate_g" type="hidden" name="startdate_g" value="2025-10-10" />
+  </div>
+
+  <script src="src/moment.min.js"></script>
+  <script src="src/moment-locales.min.js"></script>
+  <script src="src/moment-jalali.js"></script>
+  <script src="src/moment-hijri.js"></script>
+
+  <script src="src/utils/Formatter.js"></script>
+  <script src="src/adapters/CalendarAdapter.js"></script>
+  <script src="src/core/EventHandler.js"></script>
+  <script src="src/DateTimePicker.js"></script>
+
+  <script>
+    DateTimePicker.attachAll('input[data-dtp="true"]', {
+      calendar: 'persian',          
+      //storageCalendar: 'gregorian', 
+      displayFormat: 'jYYYY-jMM-jDD',
+      //storageFormat: 'YYYY-MM-DD',
+      //locale: 'en',
+      //enableTime: false,
+      //weekStart: 6, 
+      events: {
+        onOpen: ({ input }) => console.log('[onOpen]', input.id),
+        onClose: ({ input }) => console.log('[onClose]', input.id),
+        onSelect: ({ moment, input }) => console.log('[onSelect]', input.id, 'selected:', moment.format('YYYY-MM-DD')),
+        onChange: ({ display, storage, input }) => console.log('[onChange]', input.id, 'display:', display, 'storage:', storage)
+      }
+    });
+  </script>
+</body>
+</html>

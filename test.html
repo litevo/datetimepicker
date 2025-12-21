@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+  <meta charset="UTF-8">
+  <title>Moment Test Separate</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <style>
+    body { font-family: Tahoma, sans-serif; margin: 20px; }
+    h1 { font-size: 20px; }
+    .block { margin-bottom: 12px; }
+    code { background: #f2f2f2; padding: 2px 6px; border-radius: 4px; }
+  </style>
+</head>
+<body>
+  <h1>تست جداگانه‌ی Moment و افزونه‌ها</h1>
+  <div id="output"></div>
+
+  <!-- بارگذاری فقط moment -->
+  <script src="./src/moment.min.js"></script>
+  <script>
+    const out = document.getElementById('output');
+    function log(title, value) {
+      const div = document.createElement('div');
+      div.className = 'block';
+      div.innerHTML = `<strong>${title}:</strong> <code>${value}</code>`;
+      out.appendChild(div);
+    }
+
+    // تست میلادی
+    moment.locale('en');
+    log('Gregorian (میلادی)', moment().format('YYYY-MM-DD HH:mm'));
+  </script>
+
+  <!-- بارگذاری افزونه جلالی -->
+  <script src="./src/jalali-moment.browser.js"></script>
+  <script>
+    // تست شمسی
+    moment.loadPersian({usePersianDigits: false});
+    log('Persian (شمسی)', moment().format('jYYYY/jMM/jDD HH:mm'));
+  </script>
+
+  <!-- بارگذاری افزونه هجری -->
+  <script src="./src/moment-hijri.js"></script>
+  <script>
+    // تست هجری
+    log('Islamic (هجری)', moment().format('iYYYY/iMM/iDD HH:mm'));
+  </script>
+</body>
+</html>
